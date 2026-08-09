@@ -2,7 +2,7 @@ namespace src.Modelo
 {
     public class Rescue : Robot
     {
-        public Rescue(String tipoRobot) : base(tipoRobot){
+        public Rescue(string nombreRobot) : base("ChapinRescue", nombreRobot){
         }
     }
 }

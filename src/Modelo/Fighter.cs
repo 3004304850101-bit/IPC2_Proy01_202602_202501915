@@ -4,7 +4,7 @@ namespace src.Modelo
     public class Fighter : Robot
     {
         public int CapacidadCombate { get; set; }
-        public Fighter(String tipoRobot, int capacidadCombate) : base(tipoRobot)
+        public Fighter(string nombreRobot, int capacidadCombate) : base("ChapinFighter",nombreRobot)
         {
             CapacidadCombate = capacidadCombate;
         }

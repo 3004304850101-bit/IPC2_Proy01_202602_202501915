@@ -17,158 +17,158 @@ namespace src.Modelo
 
         public Ciudad(string nombre,int cantidadFilas, int cantidadColumnas)
         {
-            Nombre = nombre;
-            CantidadFilas = cantidadFilas;
-            CantidadColumnas = cantidadColumnas;
-            PrimerFila = null;
-            PrimerColumna = null;
-            CantidadCiviles = 0;
-            CantidadRecursos = 0;
+            Nombre= nombre;
+            CantidadFilas= cantidadFilas;
+            CantidadColumnas= cantidadColumnas;
+            PrimerFila= null;
+            PrimerColumna= null;
+            CantidadCiviles= 0;
+            CantidadRecursos= 0;
         }
 
         public void AgregarFilas(int cantidadFilas)
         {
-            Filas? ultimaFila = null;
-            for (int i = 1; i <=cantidadFilas; i++)
+            Filas? ultimaFila= null;
+            for (int i=1; i<=cantidadFilas;i++)
             {
-                Filas nuevaFila = new Filas(i);
+                Filas nuevaFila= new Filas(i);
                 
-                if (PrimerFila == null)
+                if (PrimerFila== null)
                 {
-                    PrimerFila = nuevaFila;
+                    PrimerFila= nuevaFila;
                 }
                 else
                 {
-                    ultimaFila!.SiguienteFila = nuevaFila;  
+                    ultimaFila!.SiguienteFila= nuevaFila;  
                 }
-                ultimaFila = nuevaFila;
+                ultimaFila= nuevaFila;
             }
         }
 
         public void AgregarColumnas(int cantidadColumnas)
         {
             Columnas? ultimaColumna = null;
-            for (int i = 1; i <= cantidadColumnas; i++)
+            for (int i=1; i<= cantidadColumnas;i++)
             {
-                Columnas nuevaColumna = new Columnas(i);
+                Columnas nuevaColumna= new Columnas(i);
                 
-                if (PrimerColumna == null)
+                if (PrimerColumna== null)
                 {
-                    PrimerColumna = nuevaColumna;
+                    PrimerColumna= nuevaColumna;
                 }
                 else
                 {
-                    ultimaColumna!.SiguienteColumna = nuevaColumna;  
+                    ultimaColumna!.SiguienteColumna= nuevaColumna;  
                 }
-                ultimaColumna = nuevaColumna;
+                ultimaColumna= nuevaColumna;
             }
         }
 
         public void AgregarCelda(int fila, int columna, string tipo)
         {
-            if (filaActual == null)
+            if (filaActual== null)
             {
-                filaActual = PrimerFila;
+                filaActual= PrimerFila;
             }
-            if (columnaActual == null)
+            if (columnaActual== null)
             {
-                columnaActual = PrimerColumna;
+                columnaActual= PrimerColumna;
             }
             Celda.EstadoCelda tipoCelda;
             switch (tipo)
             {
                 case "*":
-                    tipoCelda = Celda.EstadoCelda.Instransitable;
+                    tipoCelda= Celda.EstadoCelda.Instransitable;
                     break;
                 case " ":
-                    tipoCelda = Celda.EstadoCelda.Transitable;
+                    tipoCelda= Celda.EstadoCelda.Transitable;
                     break;
                 case "E":
-                    tipoCelda = Celda.EstadoCelda.Entrada;
+                    tipoCelda= Celda.EstadoCelda.Entrada;
                     break;
                 case "C":
-                    tipoCelda = Celda.EstadoCelda.Civil;
+                    tipoCelda= Celda.EstadoCelda.Civil;
                     CantidadCiviles++;
                     break;
                 case "R":
-                    tipoCelda = Celda.EstadoCelda.Recurso;
+                    tipoCelda= Celda.EstadoCelda.Recurso;
                     CantidadRecursos++;
                     break;
                 default:
                     throw new ArgumentException("Tipo de celda inválido");
             }
             //CREAMOS LA CELDA CON LOS PARAMETROS DE FILA, COLUMNA Y TIPO DE CELDA
-            Celda nuevaCelda = new Celda(fila, columna, tipoCelda);
+            Celda nuevaCelda= new Celda(fila, columna, tipoCelda);
             // Agregar la celda a la fila correspondiente
             
             //Cambio de fila para estar en la fila correcta
-            while (filaActual != null && filaActual.NumeroFila != fila)
+            while (filaActual!= null && filaActual.NumeroFila != fila)
             {
-                filaActual = filaActual.SiguienteFila;
-                columnaActual = PrimerColumna; // Reiniciar la columna al cambiar de fila
-                ultimaCelda = null; // Reiniciar la última celda al cambiar de fila
+                filaActual= filaActual.SiguienteFila;
+                columnaActual= PrimerColumna; // Reiniciar la columna al cambiar de fila
+                ultimaCelda= null; // Reiniciar la última celda al cambiar de fila
             }
             //Excepcion por precaucion en caso de que no se encuentre la fila
-            if (filaActual == null)
+            if (filaActual== null)
             {
                 throw new ArgumentException("Fila no encontrada");
             }
             //Primera celda de la fila
-            if (filaActual.PrimerCelda == null)
+            if (filaActual.PrimerCelda== null)
             {
-                filaActual.PrimerCelda = nuevaCelda;
+                filaActual.PrimerCelda= nuevaCelda;
             }
             //Agregar la celda al final de la fila
             else
             {
-                ultimaCelda!.Derecha = nuevaCelda;
-                nuevaCelda.Izquierda = ultimaCelda;
+                ultimaCelda!.Derecha= nuevaCelda;
+                nuevaCelda.Izquierda= ultimaCelda;
             }
             ultimaCelda=nuevaCelda;
 
             // Agregar la celda a la columna correspondiente
             //Cambio de columna para estar en la columna correcta
-            while (columnaActual != null && columnaActual.NumeroColumna != columna)
+            while (columnaActual!= null && columnaActual.NumeroColumna != columna)
             {
-                columnaActual = columnaActual.SiguienteColumna;
+                columnaActual= columnaActual.SiguienteColumna;
             }
             // Excepción por precaución en caso de que no se encuentre la columna
-            if (columnaActual == null)
+            if (columnaActual== null)
             {
                 throw new ArgumentException("Columna no encontrada");
             }
             // Primera celda de la columna
-            if (columnaActual.PrimerCelda == null)
+            if (columnaActual.PrimerCelda== null)
             {
-                columnaActual.PrimerCelda = nuevaCelda;
+                columnaActual.PrimerCelda= nuevaCelda;
             }
             // Agregar la celda al final de la columna
             else
             {
-                columnaActual.UltimaCeldaC!.Abajo = nuevaCelda;
-                nuevaCelda.Arriba = columnaActual.UltimaCeldaC;  
+                columnaActual.UltimaCeldaC!.Abajo= nuevaCelda;
+                nuevaCelda.Arriba= columnaActual.UltimaCeldaC;  
             }
-                columnaActual.UltimaCeldaC = nuevaCelda;
+                columnaActual.UltimaCeldaC= nuevaCelda;
             }
 
             public Celda BuscarCelda(int fila, int columna)
             {
-                Filas? filaActualR = PrimerFila;
-                while (filaActualR != null && filaActualR.NumeroFila != fila)
+                Filas? filaActualR= PrimerFila;
+                while (filaActualR!= null && filaActualR.NumeroFila != fila)
                 {
-                    filaActualR = filaActualR.SiguienteFila;
+                    filaActualR= filaActualR.SiguienteFila;
                 }
-                if (filaActualR == null)
+                if (filaActualR== null)
                 {
                     throw new ArgumentException("Fila no encontrada");
                 }
 
-                Celda? celdaActualR = filaActualR.PrimerCelda;
-                while (celdaActualR != null && celdaActualR.Columna != columna)
+                Celda? celdaActualR= filaActualR.PrimerCelda;
+                while (celdaActualR!= null && celdaActualR.Columna != columna)
                 {
-                    celdaActualR = celdaActualR.Derecha;
+                    celdaActualR= celdaActualR.Derecha;
                 }
-                if (celdaActualR == null)
+                if (celdaActualR== null)
                 {
                     throw new ArgumentException("Columna no encontrada");
                 }
@@ -177,9 +177,9 @@ namespace src.Modelo
 
             public void AsignarUnidadMilitar(int fila, int columna, int capacidadCombate)
             {
-                Celda celda = BuscarCelda(fila, columna);
+                Celda celda= BuscarCelda(fila, columna);
                 celda.TipoCelda = Celda.EstadoCelda.Militar;
-                celda.CapacidadCombate = capacidadCombate;
+                celda.CapacidadCombate= capacidadCombate;
             }
         }
     }
