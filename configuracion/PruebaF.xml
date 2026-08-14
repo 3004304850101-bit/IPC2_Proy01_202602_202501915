@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<configuracion>
+    <listaCiudades>
+        <ciudad>
+            <nombre filas="12" columnas="12">CiudadPruebaDFS</nombre>
+            <fila numero="1">"E      *    "</fila>
+            <fila numero="2">"  **   *    "</fila>
+            <fila numero="3">"      C*    "</fila>
+            <fila numero="4">" ***   * R  "</fila>
+            <fila numero="5">"            "</fila>
+            <fila numero="6">"  *     *** "</fila>
+            <fila numero="7">"  C   R     "</fila>
+            <fila numero="8">"  *  **     "</fila>
+            <fila numero="9">"            "</fila>
+            <fila numero="10">" **   **C   "</fila>
+            <fila numero="11">"      R     "</fila>
+            <fila numero="12">"*      *   E"</fila>
+            <unidadMilitar fila="5" columna="6">20</unidadMilitar>
+            <unidadMilitar fila="7" columna="6">35</unidadMilitar>
+            <unidadMilitar fila="9" columna="6">45</unidadMilitar>
+            <unidadMilitar fila="3" columna="6">60</unidadMilitar>
+            <unidadMilitar fila="4" columna="9">25</unidadMilitar>
+            <unidadMilitar fila="11" columna="6">30</unidadMilitar>
+        </ciudad>
+    </listaCiudades>
+    <robots>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="150">FighterFuerte</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="70">FighterMedio</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="30">FighterDebil</nombre>
+        </robot>
+    </robots>
+</configuracion>

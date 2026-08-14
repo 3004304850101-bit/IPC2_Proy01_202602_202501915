@@ -2,7 +2,7 @@
 <configuracion>
     <listaCiudades>
         <ciudad>
-            <nombre filas="5" columnas="8">CiudadPrueba</nombre>
+            <nombre filas="5" columnas="8">CiudadPrueba1</nombre>
             <fila numero="1">"E      *"</fila>
             <fila numero="2">"        "</fila>
             <fila numero="3">"  C  R  "</fila>
@@ -13,7 +13,7 @@
     </listaCiudades>
     <robots>
         <robot>
-            <nombre tipo="ChapinRescue">robot01</nombre>
+            <nombre tipo="ChapinFighter" capacidad="150">robot01</nombre>
         </robot>
         <robot>
             <nombre tipo="ChapinFighter" capacidad="100">robot02</nombre>

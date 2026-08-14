@@ -14,6 +14,7 @@ namespace src.Modelo
 
         public int CantidadCiviles { get; set; }
         public int CantidadRecursos { get; set; }
+        public int CantidadEntradas { get; set;}
 
         public Ciudad(string nombre,int cantidadFilas, int cantidadColumnas)
         {
@@ -24,6 +25,7 @@ namespace src.Modelo
             PrimerColumna= null;
             CantidadCiviles= 0;
             CantidadRecursos= 0;
+            CantidadEntradas=0;
         }
 
         public void AgregarFilas(int cantidadFilas)
@@ -85,6 +87,7 @@ namespace src.Modelo
                     break;
                 case "E":
                     tipoCelda= Celda.EstadoCelda.Entrada;
+                    CantidadEntradas++;
                     break;
                 case "C":
                     tipoCelda= Celda.EstadoCelda.Civil;
@@ -180,6 +183,59 @@ namespace src.Modelo
                 Celda celda= BuscarCelda(fila, columna);
                 celda.TipoCelda = Celda.EstadoCelda.Militar;
                 celda.CapacidadCombate= capacidadCombate;
+            }
+
+            public Celda? BuscarCeldaTipo(Celda.EstadoCelda tipo)
+            {
+                Filas? filasRecorrer=PrimerFila!;
+                
+                while (filasRecorrer != null)
+                {
+                    Celda? actual=filasRecorrer.PrimerCelda;
+                    while(actual != null)
+                    {
+                    if (actual!.TipoCelda == tipo)
+                        {
+                            return actual;
+                        }
+                        actual=actual.Derecha;
+                    }
+                    filasRecorrer=filasRecorrer.SiguienteFila;   
+                }
+                return null;
+            }
+
+            public void ImprimirCiudad()
+            {
+                Filas? filasR=PrimerFila;
+
+                while(filasR != null)
+                {
+                    Celda? actualR=filasR.PrimerCelda;
+                    while(actualR != null)
+                    {
+                        Console.Write($" {actualR.TipoCelda} ");
+                        actualR=actualR.Derecha;
+                    }
+                    Console.WriteLine();
+                    filasR=filasR.SiguienteFila;
+                }
+            }
+
+            public void LimpiarVisitados()
+            {
+                Filas? filasRecorrer=PrimerFila!;
+                
+                while (filasRecorrer != null)
+                {
+                    Celda? actual=filasRecorrer.PrimerCelda;
+                    while(actual != null)
+                    {
+                        actual.Visitado=false;
+                        actual=actual.Derecha;
+                    }
+                    filasRecorrer=filasRecorrer.SiguienteFila;   
+                }
             }
         }
     }

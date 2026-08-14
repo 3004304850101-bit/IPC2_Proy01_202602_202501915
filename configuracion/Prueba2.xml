@@ -2,7 +2,7 @@
 <configuracion>
     <listaCiudades>
         <ciudad>
-            <nombre filas="4" columnas="6">CiudadPrueba</nombre>
+            <nombre filas="4" columnas="6">CiudadPrueba2</nombre>
             <fila numero="1">"E    *"</fila>
             <fila numero="2">"  C   "</fila>
             <fila numero="3">"    R "</fila>

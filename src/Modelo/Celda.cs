@@ -15,6 +15,7 @@ namespace src.Modelo
         public int Fila { get; set; }
         public int Columna { get; set; }
         public EstadoCelda TipoCelda { get; set; }
+        public bool Visitado { get; set; }
         public int CapacidadCombate { get; set; }
 
         public Celda? Arriba { get; set; }
@@ -27,6 +28,7 @@ namespace src.Modelo
             Fila = fila;
             Columna = columna;
             TipoCelda = tipoCelda;
+            Visitado=false;
             CapacidadCombate = 0;
         }
     }
