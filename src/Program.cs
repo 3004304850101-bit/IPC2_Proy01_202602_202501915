@@ -2,6 +2,7 @@
 
 Control control=new Control();
 Buscar buscar=new Buscar();
+GeneradorGraph generador= new GeneradorGraph();
 control.CargarConfiguracion();
 
 int opcion;
@@ -18,6 +19,7 @@ do
     {
         case 1:
             Ciudad elegida=ListaCiudades();
+            elegida.LimpiarVisitados();
             Console.Clear();
             TipoMision misionElegida=ElegirMision(elegida);
             Console.Clear();
@@ -28,15 +30,9 @@ do
                 Console.Clear();
                 if (robotElegido != null)
                 {
-                    Console.WriteLine("------------DATOS DE MISION------------");
-                    Console.WriteLine(elegida.Nombre);
-                    Console.WriteLine(misionElegida);
-                    Console.WriteLine(robotElegido.NombreRobot);
-                    Console.ReadKey();
-                    Console.Clear();
-
                     //MOSTRAR MAPA (PRUEBA)
-                    elegida.ImprimirCiudad();
+                    generador.GenerarMapa(elegida);
+                    Console.WriteLine("---------Visualiza el mapa--------");
                     Console.WriteLine("Enter para continuar");
                     Console.ReadKey();
                     Console.Clear();
@@ -44,6 +40,7 @@ do
                     //Ejecucion Mision
                     Console.WriteLine("------------ENTRADA------------");
                     Celda entrada=CeldaObjetivo(elegida,Celda.EstadoCelda.Entrada,elegida.CantidadEntradas)!;
+                    Console.WriteLine("Enter para continuar");
                     Console.ReadKey();
                     Console.Clear();
                     Console.WriteLine("------------OBJETIVO------------");
@@ -78,24 +75,24 @@ do
                     if(caminoI != null)
                     {
                         Pila Camino=buscar.OrdenarCamino(caminoI);
-                        while (!Camino.EstaVacia())
-                        {
-                            Paso imprimir = Camino.Desapilar();
-                            Console.Write($"({imprimir.celdaC!.Fila},{imprimir.celdaC.Columna}) ->");
-                        }
-                        Console.Write("FIN");
-                        Console.WriteLine("");
-
+                        int Inicial=-1;
+                        int Final=-1;
                         if(robotElegido is Fighter fighter)
                         {
-                        Console.WriteLine($"Capacidad Inicial:{InicialC}, Capacidad Final: {fighter.CapacidadCombate}");
-                        fighter.CapacidadCombate=InicialC;
+                            Inicial=InicialC;
+                            Final=fighter.CapacidadCombate;
+                            fighter.CapacidadCombate = InicialC;
                         }
+                        Console.WriteLine($"[DEBUG] Inicial={Inicial}, Final={Final}, EsFighter={robotElegido is Fighter}");
+                        string dot=generador.GeneradorMapaDot(elegida);
+                        generador.GenerarCamino(dot,Camino,elegida,misionElegida,objetivo,robotElegido,Inicial,Final);
                     }
+                    Console.WriteLine("VISUALIZA EL CAMINO EN PANTALLA");
+                    Console.WriteLine("Enter para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
             }
-            Console.ReadKey();
-            Console.Clear();
             break;
         case 2:
             //SALIR

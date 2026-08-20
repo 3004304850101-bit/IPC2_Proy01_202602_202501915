@@ -46,7 +46,6 @@ namespace src.Modelo
 
             foreach(string archivo in Directory.EnumerateFiles(rutaConfiguracion,"*.xml"))
             {
-                Console.WriteLine(archivo);
                 LectorXML lector= new LectorXML(archivo);
 
                 ListaCiudad ciudad= lector.CrearCiudades();

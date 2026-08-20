@@ -232,6 +232,7 @@ namespace src.Modelo
                     while(actual != null)
                     {
                         actual.Visitado=false;
+                        actual.Camino=false;
                         actual=actual.Derecha;
                     }
                     filasRecorrer=filasRecorrer.SiguienteFila;   

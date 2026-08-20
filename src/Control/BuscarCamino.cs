@@ -73,6 +73,21 @@ namespace src.Modelo
                     pilaCamino.Apilar(pasoNuevo);
 
                 }
+                //ABAJO
+                else if (EsValida(actualC.Abajo, robot, objetivo))
+                {
+                    Celda Candidata=actualC.Abajo!;
+                    Candidata.Visitado=true;
+                    if (Candidata.TipoCelda == Celda.EstadoCelda.Militar)
+                    {
+                        if(robot is Fighter f)
+                        {
+                            f.CapacidadCombate=f.CapacidadCombate-Candidata.CapacidadCombate;
+                        }
+                    }
+                    pasoNuevo= new Paso(Candidata,Candidata.CapacidadCombate);
+                    pilaCamino.Apilar(pasoNuevo);
+                }
                 //IZQUIERA
                 else if (EsValida(actualC.Izquierda, robot, objetivo))
                 {
@@ -94,21 +109,6 @@ namespace src.Modelo
                 {
                     Celda Candidata=actualC.Arriba!;
                      Candidata.Visitado=true;
-                    if (Candidata.TipoCelda == Celda.EstadoCelda.Militar)
-                    {
-                        if(robot is Fighter f)
-                        {
-                            f.CapacidadCombate=f.CapacidadCombate-Candidata.CapacidadCombate;
-                        }
-                    }
-                    pasoNuevo= new Paso(Candidata,Candidata.CapacidadCombate);
-                    pilaCamino.Apilar(pasoNuevo);
-                }
-                //ABAJO
-                else if (EsValida(actualC.Abajo, robot, objetivo))
-                {
-                    Celda Candidata=actualC.Abajo!;
-                    Candidata.Visitado=true;
                     if (Candidata.TipoCelda == Celda.EstadoCelda.Militar)
                     {
                         if(robot is Fighter f)
@@ -142,6 +142,7 @@ namespace src.Modelo
             {
                 
                 Paso auxiliar=camino.Desapilar();
+                auxiliar.celdaC!.Camino=true;
                 aux.Apilar(auxiliar);
             }
 
